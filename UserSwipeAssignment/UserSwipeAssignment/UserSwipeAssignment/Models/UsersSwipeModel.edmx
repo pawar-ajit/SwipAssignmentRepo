@@ -10,12 +10,12 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SwipeInTime" Type="datetime" />
-          <Property Name="SwipeOutTime" Type="datetime" />
-          <Property Name="InTime" Type="int" />
-          <Property Name="OutTime" Type="varchar" MaxLength="20" />
-          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="SwipeOutTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="SwipeInTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="InTimeDuration" Type="time" Precision="0" Nullable="false" />
+          <Property Name="OutTimeDuration" Type="time" Precision="0" Nullable="false" />
         </EntityType>
         <EntityContainer Name="SwipeAssignmentDBModelStoreContainer">
           <EntitySet Name="UserSwipeDetails" EntityType="Self.UserSwipeDetails" Schema="dbo" store:Type="Tables" />
@@ -29,12 +29,12 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SwipeInTime" Type="DateTime" Precision="3" />
-          <Property Name="SwipeOutTime" Type="DateTime" Precision="3" />
-          <Property Name="InTime" Type="Int32" />
-          <Property Name="OutTime" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="SwipeInTime" Type="DateTime" Precision="7" Nullable="false" />
+          <Property Name="SwipeOutTime" Type="DateTime" Precision="7" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="7" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="InTimeDuration" Type="Time" Precision="0" Nullable="false" />
+          <Property Name="OutTimeDuration" Type="Time" Precision="0" Nullable="false" />
         </EntityType>
         <EntityContainer Name="SwipeAssignmentDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="UserSwipeDetails" EntityType="Self.UserSwipeDetail" />
@@ -48,14 +48,14 @@
           <EntitySetMapping Name="UserSwipeDetails">
             <EntityTypeMapping TypeName="SwipeAssignmentDBModel.UserSwipeDetail">
               <MappingFragment StoreEntitySet="UserSwipeDetails">
+                <ScalarProperty Name="OutTimeDuration" ColumnName="OutTimeDuration" />
+                <ScalarProperty Name="InTimeDuration" ColumnName="InTimeDuration" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="SwipeInTime" ColumnName="SwipeInTime" />
                 <ScalarProperty Name="SwipeOutTime" ColumnName="SwipeOutTime" />
-                <ScalarProperty Name="InTime" ColumnName="InTime" />
-                <ScalarProperty Name="OutTime" ColumnName="OutTime" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
         </EntityContainerMapping>

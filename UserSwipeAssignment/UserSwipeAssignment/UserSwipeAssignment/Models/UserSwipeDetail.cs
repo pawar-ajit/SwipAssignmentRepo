@@ -15,11 +15,11 @@ namespace UserSwipeAssignment.Models
     public partial class UserSwipeDetail
     {
         public int Id { get; set; }
-        public Nullable<System.DateTime> SwipeInTime { get; set; }
-        public Nullable<System.DateTime> SwipeOutTime { get; set; }
-        public Nullable<int> InTime { get; set; }
-        public string OutTime { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public System.DateTime SwipeInTime { get; set; }
+        public System.DateTime SwipeOutTime { get; set; }
+        public System.DateTime CreatedDate { get; set; }
         public int UserId { get; set; }
+        public System.TimeSpan InTimeDuration { get; set; }
+        public System.TimeSpan OutTimeDuration { get; set; }
     }
 }

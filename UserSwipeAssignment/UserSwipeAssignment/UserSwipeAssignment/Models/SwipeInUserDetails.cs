@@ -8,5 +8,6 @@ namespace UserSwipeAssignment.Controllers
     public class SwipeInUserDetails
     {
         public int UserId { get; set; }
+        public DateTime date { get; set; }
     }
 }
