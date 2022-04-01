@@ -22,9 +22,8 @@ namespace UserSwipeAssignment.Controllers
 
         [Route("api/swipe/SwipeIn")]
         [HttpPost]
-        public void SwipeIn(SwipeInUserDetails userDetails)
+        public HttpResponseMessage SwipeIn(SwipeInUserDetails userDetails)
         {
-
            //check if there's any swipe-out recorded for that day
             var lastRecord = _context.UserSwipeDetails.Where(x =>
             x.UserId.Equals(userDetails.UserId)
@@ -46,6 +45,10 @@ namespace UserSwipeAssignment.Controllers
                 record.OutTimeDuration = lastRecord.OutTimeDuration + ts;
                 record.InTimeDuration = lastRecord.InTimeDuration;//
             }
+            else if(lastRecord != null && lastRecord.SwipeInTime != new DateTime())//previous record is swipeIn
+            {
+                return Request.CreateResponse(HttpStatusCode.Conflict, "Please contact administrator, your swipe-out information is not available!");
+            }
             else
             {
                 //existing swipe-out NOT FOUND for that day
@@ -55,6 +58,8 @@ namespace UserSwipeAssignment.Controllers
 
             _context.UserSwipeDetails.Add(record);
             _context.SaveChanges();
+
+            return Request.CreateResponse(HttpStatusCode.OK, "User Swiped In successfully!!!");
 
         }
 
@@ -93,6 +98,52 @@ namespace UserSwipeAssignment.Controllers
             }
             else//existing swipe-in NOT FOUND for that day (got last record null)
             {
+                DateTime previousDate = userDetails.date.AddDays(-1);
+
+                var previousDayLastRecord = _context.UserSwipeDetails.Where(x =>
+                x.UserId.Equals(userDetails.UserId)
+                &&
+                DbFunctions.TruncateTime(x.CreatedDate) == previousDate.Date
+                ).ToList().OrderByDescending(x => x.Id).FirstOrDefault();
+            
+                if(previousDayLastRecord?.SwipeOutTime != new DateTime())//previous day swipe out present
+                {
+                    return Request.CreateResponse(HttpStatusCode.Conflict, "Please contact administrator, your swipe-in information is not available!");
+                }
+                else //previous day swipe out not present
+                {
+                    
+                    //b. We can update the swipe-out time for the previous day as 11:59:59 and calculate the IN-Time.
+                    UserSwipeDetail previousDayRecord = new UserSwipeDetail();
+                    previousDayRecord.UserId = userDetails.UserId;
+                    previousDayRecord.CreatedDate = DateTime.Now;
+                    previousDayRecord.SwipeOutTime = previousDate.Date + new TimeSpan(23, 59, 59);
+                    TimeSpan ts = previousDayRecord.SwipeOutTime.Subtract(Convert.ToDateTime(previousDayLastRecord.SwipeInTime));
+                    previousDayRecord.InTimeDuration = previousDayLastRecord.InTimeDuration + ts;
+                    previousDayRecord.OutTimeDuration = previousDayLastRecord.OutTimeDuration;
+                    _context.UserSwipeDetails.Add(previousDayRecord);
+
+                    //For the present/current day/date we can take swipe-in time as 00:00:00 
+                    //and swipe-out time as the “datetime” which is provided as input 
+                    //and the IN-Time can be calculated accordingly.
+                    UserSwipeDetail currentDayInRecord = new UserSwipeDetail();
+                    currentDayInRecord.UserId = userDetails.UserId;
+                    currentDayInRecord.CreatedDate = DateTime.Now;
+                    currentDayInRecord.SwipeInTime = userDetails.date.Date + new TimeSpan(0, 0, 0);
+                    _context.UserSwipeDetails.Add(currentDayInRecord);
+
+                    UserSwipeDetail currentDayOutRecord = new UserSwipeDetail();
+                    currentDayOutRecord.UserId = userDetails.UserId;
+                    currentDayOutRecord.CreatedDate = DateTime.Now;
+                    TimeSpan timespan = userDetails.date.Subtract(userDetails.date.Date + new TimeSpan(0, 0, 0));
+                    currentDayOutRecord.InTimeDuration = timespan;
+                    currentDayOutRecord.SwipeInTime = new DateTime();
+                    currentDayOutRecord.SwipeOutTime = userDetails.date;
+                    _context.UserSwipeDetails.Add(currentDayOutRecord);
+
+                    _context.SaveChanges();
+                }
+
                 return Request.CreateResponse(HttpStatusCode.OK, "ffaasfaffaf!!!");//temp code
             }
 
