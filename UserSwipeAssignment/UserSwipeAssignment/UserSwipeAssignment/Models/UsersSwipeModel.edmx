@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="SwipeAssignmentDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Mapping">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="CardId" Type="int" Nullable="false" />
+          <Property Name="UserType" Type="varchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="UserSwipeDetails">
           <Key>
             <PropertyRef Name="Id" />
@@ -18,6 +26,7 @@
           <Property Name="OutTimeDuration" Type="time" Precision="0" Nullable="false" />
         </EntityType>
         <EntityContainer Name="SwipeAssignmentDBModelStoreContainer">
+          <EntitySet Name="Mapping" EntityType="Self.Mapping" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserSwipeDetails" EntityType="Self.UserSwipeDetails" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -38,7 +47,16 @@
         </EntityType>
         <EntityContainer Name="SwipeAssignmentDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="UserSwipeDetails" EntityType="Self.UserSwipeDetail" />
+          <EntitySet Name="Mappings" EntityType="SwipeAssignmentDBModel.Mapping" />
         </EntityContainer>
+        <EntityType Name="Mapping">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="CardId" Type="Int32" Nullable="false" />
+          <Property Name="UserType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -56,6 +74,15 @@
                 <ScalarProperty Name="SwipeInTime" ColumnName="SwipeInTime" />
                 <ScalarProperty Name="SwipeOutTime" ColumnName="SwipeOutTime" />
                 </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mappings">
+            <EntityTypeMapping TypeName="SwipeAssignmentDBModel.Mapping">
+              <MappingFragment StoreEntitySet="Mapping">
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="CardId" ColumnName="CardId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+              </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
         </EntityContainerMapping>

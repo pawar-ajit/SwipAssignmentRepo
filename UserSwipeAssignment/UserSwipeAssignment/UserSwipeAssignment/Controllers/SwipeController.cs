@@ -13,18 +13,14 @@ namespace UserSwipeAssignment.Controllers
     {
         SwipeAssignmentDBEntities _context = new SwipeAssignmentDBEntities();
 
-        [Route("api/swipe/getDetails")]
-        [HttpGet]
-        public HttpResponseMessage GetDetails()
-        {
-            return Request.CreateResponse(HttpStatusCode.OK, "successfully!!!");
-        }
-
         [Route("api/swipe/SwipeIn")]
         [HttpPost]
         public HttpResponseMessage SwipeIn(SwipeInUserDetails userDetails)
         {
-           //check if there's any swipe-out recorded for that day
+            if (userDetails == null)
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+
+            //check if there's any swipe-out recorded for that day
             var lastRecord = _context.UserSwipeDetails.Where(x =>
             x.UserId.Equals(userDetails.UserId)
             &&
@@ -67,6 +63,9 @@ namespace UserSwipeAssignment.Controllers
         [HttpPost]
         public HttpResponseMessage SwipeOut(SwipeInUserDetails userDetails)
         {
+            if (userDetails == null)
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+
             //get that days last record
             var lastRecord = _context.UserSwipeDetails.Where(x =>
             x.UserId.Equals(userDetails.UserId)
@@ -142,11 +141,30 @@ namespace UserSwipeAssignment.Controllers
                     _context.UserSwipeDetails.Add(currentDayOutRecord);
 
                     _context.SaveChanges();
-                }
 
-                return Request.CreateResponse(HttpStatusCode.OK, "ffaasfaffaf!!!");//temp code
+                    return Request.CreateResponse(HttpStatusCode.OK, "User Swiped out successfully!!!");
+                }
+                
             }
 
+        }
+
+        [Route("api/swipe/mapCardEmp")]
+        [HttpPost]
+        public HttpResponseMessage MapCardEmployee(EmpMapping data)
+        {
+            if(data == null)
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+
+            Mapping record = new Mapping();
+            record.CardId = data.CardId;
+            record.EmployeeId = data.EmployeeId;
+            record.UserType = data.UserType;
+
+            _context.Mappings.Add(record);
+            _context.SaveChanges();
+            
+            return Request.CreateResponse(HttpStatusCode.OK, "Employee mapped successfully!!!");
         }
     }
 }
