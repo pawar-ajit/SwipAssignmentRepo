@@ -27,5 +27,6 @@ namespace UserSwipeAssignment.Models
     
         public virtual DbSet<UserSwipeDetail> UserSwipeDetails { get; set; }
         public virtual DbSet<Mapping> Mappings { get; set; }
+        public virtual DbSet<UserDetail> UserDetails { get; set; }
     }
 }

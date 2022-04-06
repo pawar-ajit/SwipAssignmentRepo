@@ -13,6 +13,16 @@
           <Property Name="CardId" Type="int" Nullable="false" />
           <Property Name="UserType" Type="varchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="UserDetails">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserPassword" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ActiveStatus" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="UserSwipeDetails">
           <Key>
             <PropertyRef Name="Id" />
@@ -27,6 +37,7 @@
         </EntityType>
         <EntityContainer Name="SwipeAssignmentDBModelStoreContainer">
           <EntitySet Name="Mapping" EntityType="Self.Mapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserSwipeDetails" EntityType="Self.UserSwipeDetails" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -48,6 +59,7 @@
         <EntityContainer Name="SwipeAssignmentDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="UserSwipeDetails" EntityType="Self.UserSwipeDetail" />
           <EntitySet Name="Mappings" EntityType="SwipeAssignmentDBModel.Mapping" />
+          <EntitySet Name="UserDetails" EntityType="SwipeAssignmentDBModel.UserDetail" />
         </EntityContainer>
         <EntityType Name="Mapping">
           <Key>
@@ -56,6 +68,16 @@
           <Property Name="EmployeeId" Type="Int32" Nullable="false" />
           <Property Name="CardId" Type="Int32" Nullable="false" />
           <Property Name="UserType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserPassword" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ActiveStatus" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -82,6 +104,17 @@
                 <ScalarProperty Name="UserType" ColumnName="UserType" />
                 <ScalarProperty Name="CardId" ColumnName="CardId" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserDetails">
+            <EntityTypeMapping TypeName="SwipeAssignmentDBModel.UserDetail">
+              <MappingFragment StoreEntitySet="UserDetails">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ActiveStatus" ColumnName="ActiveStatus" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
