@@ -30,5 +30,31 @@ namespace UserSwipeAssignment.Controllers
             }
         }
 
+        [Route("api/user/Validate")]
+        [HttpGet]
+        public HttpResponseMessage Validate(string token, string username)
+        {
+            try
+            {
+                UserDetail user= _context.UserDetails.FirstOrDefault(x => x.UserName == username);
+                if (user == null)
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid User!!!");
+
+                string tokenUsername = TokenManager.ValidateToken(token);
+                if (username.Equals(tokenUsername))
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, "User validated successfully!!!");
+                }
+
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid Token!!!");
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex.Message, ex);
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, "Internal Server Error!!!");
+            }
+        }
+
     }
 }

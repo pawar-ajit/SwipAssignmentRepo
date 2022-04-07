@@ -9,5 +9,6 @@ namespace UserSwipeAssignment.Controllers
     {
         public int UserId { get; set; }
         public DateTime date { get; set; }
+        public string token { get; set; }
     }
 }

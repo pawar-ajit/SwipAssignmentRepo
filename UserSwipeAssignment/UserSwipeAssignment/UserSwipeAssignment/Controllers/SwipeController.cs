@@ -23,6 +23,16 @@ namespace UserSwipeAssignment.Controllers
 
             try
             {
+                UserDetail user = _context.UserDetails.FirstOrDefault(x => x.UserId == userDetails.UserId);
+                if (user == null)
+                    return Request.CreateResponse(HttpStatusCode.Unauthorized, "Invalid User!!!");
+
+                string tokenUsername = TokenManager.ValidateToken(userDetails.token);
+                if (!user.UserName.Equals(tokenUsername))
+                {
+                    return Request.CreateResponse(HttpStatusCode.Unauthorized, "Invalid Token!!!");
+                }
+
                 //check if there's any swipe-out recorded for that day
                 var lastRecord = _context.UserSwipeDetails.Where(x =>
                 x.UserId.Equals(userDetails.UserId)
@@ -77,6 +87,16 @@ namespace UserSwipeAssignment.Controllers
 
             try
             {
+                UserDetail user = _context.UserDetails.FirstOrDefault(x => x.UserId == userDetails.UserId);
+                if (user == null)
+                    return Request.CreateResponse(HttpStatusCode.Unauthorized, "Invalid User!!!");
+
+                string tokenUsername = TokenManager.ValidateToken(userDetails.token);
+                if (!user.UserName.Equals(tokenUsername))
+                {
+                    return Request.CreateResponse(HttpStatusCode.Unauthorized, "Invalid Token!!!");
+                }
+
                 //get that days last record
                 var lastRecord = _context.UserSwipeDetails.Where(x =>
                 x.UserId.Equals(userDetails.UserId)
