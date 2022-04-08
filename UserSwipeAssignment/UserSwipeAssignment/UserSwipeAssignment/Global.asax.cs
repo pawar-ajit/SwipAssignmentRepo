@@ -12,6 +12,7 @@ namespace UserSwipeAssignment
         protected void Application_Start()
         {
             log4net.Config.XmlConfigurator.Configure();
+            UnityConfig.RegisterComponents();
             GlobalConfiguration.Configure(WebApiConfig.Register);
         }
     }
