@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SwipeAssignmentDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="SwipeAssignmentDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Mapping">
           <Key>
             <PropertyRef Name="EmployeeId" />
@@ -40,27 +40,11 @@
           <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserSwipeDetails" EntityType="Self.UserSwipeDetails" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SwipeAssignmentDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="UserSwipeDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SwipeInTime" Type="DateTime" Precision="7" Nullable="false" />
-          <Property Name="SwipeOutTime" Type="DateTime" Precision="7" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="7" Nullable="false" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="InTimeDuration" Type="Time" Precision="0" Nullable="false" />
-          <Property Name="OutTimeDuration" Type="Time" Precision="0" Nullable="false" />
-        </EntityType>
-        <EntityContainer Name="SwipeAssignmentDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="UserSwipeDetails" EntityType="Self.UserSwipeDetail" />
-          <EntitySet Name="Mappings" EntityType="SwipeAssignmentDBModel.Mapping" />
-          <EntitySet Name="UserDetails" EntityType="SwipeAssignmentDBModel.UserDetail" />
-        </EntityContainer>
         <EntityType Name="Mapping">
           <Key>
             <PropertyRef Name="EmployeeId" />
@@ -74,47 +58,64 @@
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UserPassword" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ActiveStatus" Type="Boolean" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
+        <EntityType Name="UserSwipeDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SwipeOutTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="SwipeInTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="InTimeDuration" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="OutTimeDuration" Type="Time" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityContainer Name="SwipeAssignmentDBEntitiesNew" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Mappings" EntityType="Self.Mapping" />
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
+          <EntitySet Name="UserSwipeDetails" EntityType="Self.UserSwipeDetail" />
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SwipeAssignmentDBModelStoreContainer" CdmEntityContainer="SwipeAssignmentDBEntities">
-          <EntitySetMapping Name="UserSwipeDetails">
-            <EntityTypeMapping TypeName="SwipeAssignmentDBModel.UserSwipeDetail">
-              <MappingFragment StoreEntitySet="UserSwipeDetails">
-                <ScalarProperty Name="OutTimeDuration" ColumnName="OutTimeDuration" />
-                <ScalarProperty Name="InTimeDuration" ColumnName="InTimeDuration" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="SwipeInTime" ColumnName="SwipeInTime" />
-                <ScalarProperty Name="SwipeOutTime" ColumnName="SwipeOutTime" />
-                </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+        <EntityContainerMapping StorageEntityContainer="SwipeAssignmentDBModelStoreContainer" CdmEntityContainer="SwipeAssignmentDBEntitiesNew">
           <EntitySetMapping Name="Mappings">
             <EntityTypeMapping TypeName="SwipeAssignmentDBModel.Mapping">
               <MappingFragment StoreEntitySet="Mapping">
-                <ScalarProperty Name="UserType" ColumnName="UserType" />
-                <ScalarProperty Name="CardId" ColumnName="CardId" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="CardId" ColumnName="CardId" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserDetails">
             <EntityTypeMapping TypeName="SwipeAssignmentDBModel.UserDetail">
               <MappingFragment StoreEntitySet="UserDetails">
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="ActiveStatus" ColumnName="ActiveStatus" />
-                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="ActiveStatus" ColumnName="ActiveStatus" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserSwipeDetails">
+            <EntityTypeMapping TypeName="SwipeAssignmentDBModel.UserSwipeDetail">
+              <MappingFragment StoreEntitySet="UserSwipeDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SwipeOutTime" ColumnName="SwipeOutTime" />
+                <ScalarProperty Name="SwipeInTime" ColumnName="SwipeInTime" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="InTimeDuration" ColumnName="InTimeDuration" />
+                <ScalarProperty Name="OutTimeDuration" ColumnName="OutTimeDuration" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

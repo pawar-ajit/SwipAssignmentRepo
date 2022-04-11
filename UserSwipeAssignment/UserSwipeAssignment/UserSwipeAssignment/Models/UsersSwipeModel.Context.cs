@@ -13,10 +13,10 @@ namespace UserSwipeAssignment.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SwipeAssignmentDBEntities : DbContext
+    public partial class SwipeAssignmentDBEntitiesNew : DbContext
     {
-        public SwipeAssignmentDBEntities()
-            : base("name=SwipeAssignmentDBEntities")
+        public SwipeAssignmentDBEntitiesNew()
+            : base("name=SwipeAssignmentDBEntitiesNew")
         {
         }
     
@@ -25,8 +25,8 @@ namespace UserSwipeAssignment.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<UserSwipeDetail> UserSwipeDetails { get; set; }
         public virtual DbSet<Mapping> Mappings { get; set; }
         public virtual DbSet<UserDetail> UserDetails { get; set; }
+        public virtual DbSet<UserSwipeDetail> UserSwipeDetails { get; set; }
     }
 }

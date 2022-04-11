@@ -4,10 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="26354dc512f54dfaaf403fd57b4fd352" Name="Diagram1">
-        <EntityTypeShape EntityType="SwipeAssignmentDBModel.UserSwipeDetail" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SwipeAssignmentDBModel.Mapping" Width="1.5" PointX="3.375" PointY="0.75" />
-        <EntityTypeShape EntityType="SwipeAssignmentDBModel.UserDetail" Width="1.5" PointX="3.375" PointY="3.75" />
+      <Diagram DiagramId="448097205b6a4a3294102e84d2805d35" Name="Diagram1">
+        <EntityTypeShape EntityType="SwipeAssignmentDBModel.Mapping" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SwipeAssignmentDBModel.UserDetail" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SwipeAssignmentDBModel.UserSwipeDetail" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

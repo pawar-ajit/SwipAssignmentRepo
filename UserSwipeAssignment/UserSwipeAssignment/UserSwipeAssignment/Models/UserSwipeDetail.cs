@@ -15,8 +15,8 @@ namespace UserSwipeAssignment.Models
     public partial class UserSwipeDetail
     {
         public int Id { get; set; }
-        public System.DateTime SwipeInTime { get; set; }
         public System.DateTime SwipeOutTime { get; set; }
+        public System.DateTime SwipeInTime { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public int UserId { get; set; }
         public System.TimeSpan InTimeDuration { get; set; }

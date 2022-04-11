@@ -11,7 +11,7 @@ namespace UserSwipeAssignment.Controllers
 {
     public class UserController : ApiController
     {
-        SwipeAssignmentDBEntities _context = new SwipeAssignmentDBEntities();
+        SwipeAssignmentDBEntitiesNew _context = new SwipeAssignmentDBEntitiesNew();
 
         [Route("api/user/login")]
         [HttpPost]
