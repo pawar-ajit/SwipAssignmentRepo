@@ -18,8 +18,6 @@ class App extends React.Component {
           <Link to="/login">Login</Link>
           <Link to="/about">About</Link>
       </nav>
-
-        
     </div>
     )
 }
