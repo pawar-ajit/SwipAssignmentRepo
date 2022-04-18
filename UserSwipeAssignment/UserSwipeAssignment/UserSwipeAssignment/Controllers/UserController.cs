@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Web.Http;
 using UserSwipeAssignment.Models;
 using UserSwipeAssignment.Utilities;
@@ -17,6 +18,8 @@ namespace UserSwipeAssignment.Controllers
         [HttpPost]
         public HttpResponseMessage UserLogin(UserModel data)
         {
+            Thread.Sleep(9000);
+
             UserDetail user = _context.UserDetails.FirstOrDefault(x => x.UserName == data.UserName && x.UserPassword == data.Password);
 
             if (user == null)

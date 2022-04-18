@@ -11,3 +11,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.fa-spinner{
+  animation: spinner 2s linear infinite;
+  height: 50px;
+  width: 50px;
+  /* transform: translateX(-50%); */
+}
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
