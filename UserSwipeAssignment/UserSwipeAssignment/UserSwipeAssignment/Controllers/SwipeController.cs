@@ -27,7 +27,8 @@ namespace UserSwipeAssignment.Controllers
                 if (user == null)
                     return Request.CreateResponse(HttpStatusCode.Unauthorized, "Invalid User!!!");
 
-                string tokenUsername = TokenManager.ValidateToken(userDetails.token);
+                TokenManager tmgr = new TokenManager();
+                string tokenUsername = tmgr.ValidateToken(userDetails.token);
                 if (!user.UserName.Equals(tokenUsername))
                 {
                     return Request.CreateResponse(HttpStatusCode.Unauthorized, "Invalid Token!!!");
@@ -91,7 +92,8 @@ namespace UserSwipeAssignment.Controllers
                 if (user == null)
                     return Request.CreateResponse(HttpStatusCode.Unauthorized, "Invalid User!!!");
 
-                string tokenUsername = TokenManager.ValidateToken(userDetails.token);
+                TokenManager tmgr = new TokenManager();
+                string tokenUsername = tmgr.ValidateToken(userDetails.token);
                 if (!user.UserName.Equals(tokenUsername))
                 {
                     return Request.CreateResponse(HttpStatusCode.Unauthorized, "Invalid Token!!!");

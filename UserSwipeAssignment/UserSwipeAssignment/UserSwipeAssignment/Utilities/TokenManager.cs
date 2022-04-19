@@ -10,9 +10,9 @@ namespace UserSwipeAssignment.Utilities
 {
     public class TokenManager
     {
-        private static string Secret = "ERMN05OPLoDvbTTa/QkqLNMI7cPLguaRyHzyg7n5qNBVjQmtBhz4SzYh4NBVCXi3KJHlSXKP+oi2+bXr6CUYTR==";
+        private string Secret = "ERMN05OPLoDvbTTa/QkqLNMI7cPLguaRyHzyg7n5qNBVjQmtBhz4SzYh4NBVCXi3KJHlSXKP+oi2+bXr6CUYTR==";
 
-        public static string GenerateToken(string username)
+        public virtual string GenerateToken(string username)
         {
             byte[] key = Convert.FromBase64String(Secret);
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(key);
@@ -30,7 +30,7 @@ namespace UserSwipeAssignment.Utilities
             return handler.WriteToken(token);
         }
 
-        public static ClaimsPrincipal GetPrincipal(string token)
+        public ClaimsPrincipal GetPrincipal(string token)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace UserSwipeAssignment.Utilities
             }
         }
 
-        public static string ValidateToken(string token)
+        public virtual string ValidateToken(string token)
         {
             string username = null;
             ClaimsPrincipal principal = GetPrincipal(token);

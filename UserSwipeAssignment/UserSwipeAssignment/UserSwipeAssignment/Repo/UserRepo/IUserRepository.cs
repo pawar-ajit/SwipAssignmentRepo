@@ -10,5 +10,6 @@ namespace UserSwipeAssignment.UserRepo
     public interface IUserRepository
     {
         UserDetail GetUserById(int userId);
+        UserDetail GetUserByName(UserModel data);
     }
 }

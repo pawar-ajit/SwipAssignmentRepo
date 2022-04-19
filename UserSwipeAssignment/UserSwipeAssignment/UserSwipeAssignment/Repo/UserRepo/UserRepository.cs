@@ -11,12 +11,20 @@ namespace UserSwipeAssignment.UserRepo
     {
         SwipeAssignmentDBEntitiesNew _context = new SwipeAssignmentDBEntitiesNew();
 
-        public virtual UserDetail GetUserById(int userId)
+        public UserDetail GetUserById(int userId)
         {
             UserDetail user = _context.UserDetails.FirstOrDefault(x => x.UserId == userId);
 
             return user;
             //return new UserDetail { UserId = 222, UserName = "pppp" };
         }
+
+        public UserDetail GetUserByName(UserModel data)
+        {
+            UserDetail user = _context.UserDetails.FirstOrDefault(x => x.UserName == data.UserName && x.UserPassword == data.Password);
+
+            return user;
+        }
+
     }
 }
