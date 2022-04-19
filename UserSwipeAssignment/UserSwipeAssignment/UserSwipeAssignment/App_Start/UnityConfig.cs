@@ -1,4 +1,5 @@
 using BusineesLayer;
+using UserSwipeAssignment.UserRepo;
 using System.Web.Http;
 using Unity;
 using Unity.WebApi;
@@ -17,6 +18,7 @@ namespace UserSwipeAssignment
             // e.g. container.RegisterType<ITestService, TestService>();
             
             container.RegisterType<IEmployee, EmployeeSQL>();
+            container.RegisterType<IUserRepository, UserRepository>();
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }
     }

@@ -1,11 +1,11 @@
-﻿using System;
+﻿using UserSwipeAssignment.UserRepo;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Web.Http;
-using UserSwipeAssignment.DAL;
 using UserSwipeAssignment.Models;
 using UserSwipeAssignment.Utilities;
 
@@ -14,9 +14,9 @@ namespace UserSwipeAssignment.Controllers
     public class UserController : ApiController
     {
 
-        UsersDAL _usersDAL;
+        IUserRepository _usersDAL;
 
-        public UserController(UsersDAL u)
+        public UserController(IUserRepository u)
         {
             _usersDAL = u;
         }

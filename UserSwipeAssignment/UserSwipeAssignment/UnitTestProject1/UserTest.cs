@@ -7,8 +7,8 @@ using Moq;
 using NUnit.Framework;
 using UserSwipeAssignment;
 using UserSwipeAssignment.Controllers;
-using UserSwipeAssignment.DAL;
 using UserSwipeAssignment.Models;
+using UserSwipeAssignment.UserRepo;
 using Assert = NUnit.Framework.Assert;
 
 namespace UnitTestProject1
@@ -16,12 +16,12 @@ namespace UnitTestProject1
     [TestFixture]
     public class UserTest
     {
-        private readonly Mock<UsersDAL> _mockUserDAL;
+        private readonly Mock<IUserRepository> _mockUserDAL;
         private readonly UserController _userController;
 
         public UserTest()
         {
-            _mockUserDAL = new Mock<UsersDAL>();
+            _mockUserDAL = new Mock<IUserRepository>();
             _userController = new UserController(_mockUserDAL.Object);
         }
 

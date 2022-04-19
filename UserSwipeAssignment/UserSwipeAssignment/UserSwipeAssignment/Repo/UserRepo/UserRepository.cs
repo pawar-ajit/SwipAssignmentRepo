@@ -1,12 +1,13 @@
-﻿using System;
+﻿using UserSwipeAssignment.UserRepo;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using UserSwipeAssignment.Models;
 
-namespace UserSwipeAssignment.DAL
+namespace UserSwipeAssignment.UserRepo
 {
-    public class UsersDAL
+    public class UserRepository : IUserRepository
     {
         SwipeAssignmentDBEntitiesNew _context = new SwipeAssignmentDBEntitiesNew();
 

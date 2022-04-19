@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26228.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserSwipeAssignment", "UserSwipeAssignment\UserSwipeAssignment.csproj", "{F1EE9CC8-DBA3-4DC6-9488-EC1BC2F28B83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusineesLayer", "BusineesLayer\BusineesLayer.csproj", "{B35B1965-8CE8-470C-89AE-2A122DE48870}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "BusineesLayer\DAL.csproj", "{B35B1965-8CE8-470C-89AE-2A122DE48870}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "UnitTestProject1\UnitTestProject.csproj", "{7BDDC8EE-0275-41CA-9D43-241D95D611D5}"
 EndProject
