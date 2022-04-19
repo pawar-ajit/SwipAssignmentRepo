@@ -141,6 +141,7 @@
     <Compile Include="Controllers\DIDemoController.cs" />
     <Compile Include="Controllers\SwipeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="DAL\UsersDAL.cs" />
     <Compile Include="Filters\CustomAuthenticationFilter.cs" />
     <Compile Include="Models\EmpMapping.cs" />
     <Compile Include="Models\Mapping.cs">

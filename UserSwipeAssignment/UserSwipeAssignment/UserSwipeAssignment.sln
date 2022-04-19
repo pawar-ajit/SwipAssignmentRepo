@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserSwipeAssignment", "User
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusineesLayer", "BusineesLayer\BusineesLayer.csproj", "{B35B1965-8CE8-470C-89AE-2A122DE48870}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "UnitTestProject1\UnitTestProject.csproj", "{7BDDC8EE-0275-41CA-9D43-241D95D611D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +23,15 @@ Global
 		{B35B1965-8CE8-470C-89AE-2A122DE48870}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B35B1965-8CE8-470C-89AE-2A122DE48870}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B35B1965-8CE8-470C-89AE-2A122DE48870}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BDDC8EE-0275-41CA-9D43-241D95D611D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BDDC8EE-0275-41CA-9D43-241D95D611D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BDDC8EE-0275-41CA-9D43-241D95D611D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BDDC8EE-0275-41CA-9D43-241D95D611D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {64D0DD0C-8A12-47D2-A8E5-7586C20EBD78}
 	EndGlobalSection
 EndGlobal
