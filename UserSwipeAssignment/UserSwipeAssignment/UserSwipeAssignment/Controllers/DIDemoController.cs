@@ -20,6 +20,7 @@ namespace UserSwipeAssignment.Controllers
         [HttpGet]
         public HttpResponseMessage GetUserCount()
         {
+            //test comment
             return Request.CreateResponse(HttpStatusCode.OK, "Count: "+ _emp.GetCount());
         }
     }
