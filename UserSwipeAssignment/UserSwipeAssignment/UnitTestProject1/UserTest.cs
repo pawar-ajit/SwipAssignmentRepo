@@ -47,17 +47,30 @@ namespace UnitTestProject1
         [Test]
         public void UserLogin()
         {
-            _mockUserDAL.Setup(x => x.GetUserByName(It.IsAny<UserModel>())).Returns(new UserDetail { UserName = "ajitPAW--", UserId = 1234, ActiveStatus=true });
-            
+            _mockUserDAL.SetupSequence(x => x.GetUserByName(It.IsAny<UserModel>()))
+                .Returns((UserDetail) null)
+                .Returns(new UserDetail { UserName = "ajitPAW--", UserId = 1234, ActiveStatus = false })
+                .Returns(new UserDetail { UserName = "ajitPAW--", UserId = 1234, ActiveStatus = true });
+
             _mocktmgr.Setup(x => x.GenerateToken(It.IsAny<string>())).Returns("gasgsdagagagagaggda");
             
             UserModel m = new UserModel { UserName = "pratik", Password = "pratik@123" };
-            var resp = _userController.UserLogin(m);
+            var resp1 = _userController.UserLogin(m);
+            var resp2 = _userController.UserLogin(m);
+            var resp3 = _userController.UserLogin(m);
+
+            string result1;
+            resp1.TryGetContentValue<string>(out result1);
+
+            string result2;
+            resp2.TryGetContentValue<string>(out result2);
+
             string token;
-            resp.TryGetContentValue<string>(out token);
+            resp3.TryGetContentValue<string>(out token);
 
+            Assert.AreEqual("Invalid User!!!", result1);
+            Assert.AreEqual("Inactive User!!!", result2);
             Assert.AreEqual("gasgsdagagagagaggda", token);
-
         }
 
         [Test]

@@ -3,6 +3,7 @@ using UserSwipeAssignment.UserRepo;
 using System.Web.Http;
 using Unity;
 using Unity.WebApi;
+using UserSwipeAssignment.Repo.SwipeRepo;
 
 namespace UserSwipeAssignment
 {
@@ -19,6 +20,8 @@ namespace UserSwipeAssignment
             
             container.RegisterType<IEmployee, EmployeeSQL>();
             container.RegisterType<IUserRepository, UserRepository>();
+            container.RegisterType<ISwipeRepo, SwipeRepo>();
+            
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }
     }
