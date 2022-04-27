@@ -12,7 +12,7 @@ namespace UserSwipeAssignment
         {
             // Web API configuration and services
 
-            EnableCorsAttribute cors = new EnableCorsAttribute("http://localhost:3000", "*", "GET,POST");
+            EnableCorsAttribute cors = new EnableCorsAttribute("http://localhost:5000", "*", "GET,POST");
             config.EnableCors(cors);
 
             // Web API routes
