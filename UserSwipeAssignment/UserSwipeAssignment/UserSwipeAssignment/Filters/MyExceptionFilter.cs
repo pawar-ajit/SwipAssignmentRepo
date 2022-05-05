@@ -15,16 +15,38 @@ namespace UserSwipeAssignment.Filters
         {
             Logger.Error(actionExecutedContext.Exception.Message, actionExecutedContext.Exception);
 
-            var response = new HttpResponseMessage(HttpStatusCode.InternalServerError)
+            var actionType = actionExecutedContext.Exception.GetType();
+
+            HttpResponseMessage response;
+            
+            if (actionType == typeof(UnauthorizedAccessException))
             {
-                Content = new StringContent("An unhandled exception was thrown by controller: "+
-                actionExecutedContext.ActionContext.ActionDescriptor.ControllerDescriptor.ControllerName
-                +" and In action: "+ actionExecutedContext.ActionContext.ActionDescriptor.ActionName),
+                response = new HttpResponseMessage(HttpStatusCode.Unauthorized)
+                {
+                    Content = new StringContent("User not authenticated!!!")
+                };
+            }
+            else if (actionType == typeof(NullReferenceException))
+            {
+                response = new HttpResponseMessage(HttpStatusCode.InternalServerError)
+                {
+                    Content = new StringContent("null refernece exception found!!!")
+                };
+            }
+            else
+            {
+                response = new HttpResponseMessage(HttpStatusCode.InternalServerError)
+                {
+                    Content = new StringContent("An unhandled exception was thrown by controller: " +
+                    actionExecutedContext.ActionContext.ActionDescriptor.ControllerDescriptor.ControllerName
+                    + " and In action: " + actionExecutedContext.ActionContext.ActionDescriptor.ActionName),
                     ReasonPhrase = "Internal Server Error.Please Contact your Administrator."
-            };
-            
+                };
+            }
+
             actionExecutedContext.Response = response;
-            
+
+            base.OnException(actionExecutedContext);
         }
     }
 }
