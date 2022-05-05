@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using UserSwipeAssignment.Filters;
 
 namespace UserSwipeAssignment
 {
@@ -14,6 +15,8 @@ namespace UserSwipeAssignment
 
             EnableCorsAttribute cors = new EnableCorsAttribute("http://localhost:5000", "*", "GET,POST");
             config.EnableCors(cors);
+
+            config.Filters.Add(new MyExceptionFilter());
 
             // Web API routes
             config.MapHttpAttributeRoutes();
